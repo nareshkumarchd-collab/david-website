@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design tokens (fluid.glass) ───────────────────────── */
+:root {
+  --color-cream:       #f3f0ec;
+  --color-black:       #0b1012;
+  --color-grey:        #212325;
+  --color-taupe:       #d4cec6;
+
+  --ease-out-quart:    cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-out-cubic:    cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-in-out-quart: cubic-bezier(0.77,  0,    0.175, 1);
+}
+
+/* ── Base ──────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-aeonik), system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-grey);
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* All headings: regular weight, tight line-height — fluid.glass style */
+h1, h2, h3, h4 {
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background: var(--color-grey);
+  color: var(--color-cream);
+}
+
+/* ── Animated underline hover (fluid.glass) ───────────── */
+.link-line {
+  position: relative;
+  display: inline-block;
+}
+.link-line::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.5s cubic-bezier(1, 0, 0, 1);
+}
+.link-line:hover::after { transform: scaleX(1); }
+
+/* ── Grain overlay ─────────────────────────────────────── */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
